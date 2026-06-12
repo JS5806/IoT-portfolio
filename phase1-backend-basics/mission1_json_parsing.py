@@ -15,22 +15,21 @@ _______________________________________________
 ##################################### [A1] #####################################
 import requests
 
-def get_seoul_weather():
-    response = requests.get("https://wttr.in/Seoul?format=j1")  # 설명1
-    data = response.json()                                       # 설명1
-    current = data['current_condition'][0]                       # 설명1
-
+def now_seoul_weather():
+    response = requests.get("https://wttr.in/Seoul?format=j1")
+    data = response.json()
+    current = data['current_condition'][0]
     return {
-        "temp":        int(current['temp_C']),           # 설명3
-        "feels_like":  int(current['FeelsLikeC']),       # 설명3
-        "description": current['weatherDesc'][0]['value']
+        "temp":current['temp_C'],
+        "feels_like":current["FeelsLikeC"],
+        "desc":current["weatherDesc"][0]['value']
     }
 
-if __name__ == "__main__":   # 설명4
-    weather = get_seoul_weather()
+if __name__ == "__main__":
+    weather = now_seoul_weather()
     print("현재 온도: ", weather['temp'])
     print("체감온도: ", weather['feels_like'])
-    print("날씨 설명: ", weather['description'])
+    print("날씨 설명: ", weather['desc'])
 
 ################################################################################
 
